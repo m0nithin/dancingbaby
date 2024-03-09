@@ -48,6 +48,27 @@
             padding: 10px 20px;
             font-size: 16px;
         }
+        #toggleButton {
+            width: 50px; /* Adjust width and height as needed */
+            height: 50px;
+            background-image: url('play.png'); /* Set the path to your play button image */
+            background-size: cover;
+            border: none;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+        }
+
+        #toggleButton:hover{
+            background-color: #000002;
+        }
+
+        #toggleButton.pause {
+            background-image: url('mute.png'); /* Set the path to your pause button image */
+            background-color: transparent;
+            border: none;
+        }
+
     </style>
 </head>
 
@@ -475,7 +496,7 @@ background: linear-gradient(326deg, rgb(162, 194, 82) 0%, rgb(84, 152, 215) 100%
                                                 <p style="font-size: 20px !important">
                                                     <h1> About Dancing Baby</h1>
                                                     <br /> $DBABY is positioned as the epitome of meme-inspired cryptocurrency, leveraging the iconic Dancing Baby meme's cultural significance. Without pre-sale, taxes, or a structured team, it embodies a decentralized ethos. Emphasizing its roots, $DBABY serves as an homage rather than an originator, celebrating the timeless allure of internet culture. Its launch strategy, including LP burning and contract revocation, underscores a commitment to community engagement and permanence, resonating with enthusiasts seeking authenticity in the volatile meme coin landscape.<br /><br /> 
-                                                    <br /><br />The “Dancing Baby”, also called “Baby Cha-Cha” or “the Oogachacka Baby”, is an internet meme of a 3D-rendered baby performing a cha-cha type dance. This is know to many as the FIRST viral meme on the internet dating back as far as 1995.
+                                                    The “Dancing Baby”, also called “Baby Cha-Cha” or “the Oogachacka Baby”, is an internet meme of a 3D-rendered baby performing a cha-cha type dance. This is know to many as the FIRST viral meme on the internet dating back as far as 1995.
                                                     <br /><br />
                                                     This groundbreaking initiative taps into the nostalgia and humor associated with internet memes, particularly the Dancing Baby, a pioneering figure in online virality. $DBABY's emergence marks a departure from derivative coins, presenting itself as a symbol of pure memetic power. Despite its lack of financial utility or roadmap, it captures the imagination of crypto enthusiasts, offering a playful yet compelling alternative to traditional investments. As the first viral meme on the internet, the Dancing Baby reclaims its throne in the form of $DBABY, ushering in a new era of meme coin dominance fueled by community-driven fervor and cultural resonance.
                                                     <br /><br /> Dance with Baby if you want to remain!
@@ -770,6 +791,8 @@ background: linear-gradient(326deg, rgb(162, 194, 82) 0%, rgb(84, 152, 215) 100%
                 </div> -->
     </div>
     <!-- preloader -->
+    <button id="toggleButton" class="play" style="position: fixed; z-index: 100; bottom: 10px; right: 10px;"></button>
+
     <div class="overlay" id="overlay" >
         <!-- <div class="preloader preloader-alt no-split"> -->
         <!-- <span class="spinner spinner-alt">
@@ -782,15 +805,34 @@ background: linear-gradient(326deg, rgb(162, 194, 82) 0%, rgb(84, 152, 215) 100%
     </div>
     <script>
         let removeScreen = document.getElementById('removeScreen');
+        let toggleButton = document.getElementById('toggleButton');
         let audio = new Audio('/nono.mp3');
+        let isPlaying = false;
     
         removeScreen.onclick = function() {
             console.log('clicked');
             document.getElementById('overlay').style.display = 'none';
             audio.loop = true; // Set loop property to true
-            audio.play();
+            togglePlay();
         };
+        toggleButton.onclick = function() {
+            audio.loop = true; // Set loop property to true
+            togglePlay();
+        };
+    
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+                toggleButton.classList.remove('pause');
+            } else {
+                audio.play();
+                isPlaying = true;
+                toggleButton.classList.add('pause');
+            }
+        }
     </script>
+    
     
     <!-- JavaScript -->
     <script src="assets/js/jquery.bundle064306430643.js?ver=1950"></script>
